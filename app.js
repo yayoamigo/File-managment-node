@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 
     const CREATE_FILE = 'create a file';
     const DELETE_FILE = 'delete the file';
-    const RENAME_FILE = 'rename the file to ';
+    const RENAME_FILE = 'rename the file';
     const ADD_TO = 'add to the file'
 
 
@@ -22,16 +22,20 @@ const fs = require('fs/promises');
         
     }
 
-    const deleteFile = (path)=>{
+    const deleteFile = async(path)=>{
+        await fs.unlink(path)
         console.log(`Deleting ${path}`);
 
     }
 
-    const renameFile = (oldPath, newPath) =>{
+    const renameFile = async(oldPath, newPath) =>{
+        await fs.rename(oldPath,newPath)
         console.log(`Rename ${oldPath} to ${newPath}`);
     }
 
-    const addToFile = (path, content) =>{
+    const addToFile = async (path, content) =>{
+        const fileHandle = await fs.open(path, 'a');
+        fileHandle.write(content)
         console.log(`Adding ${content} to ${path}`);
     }
 
