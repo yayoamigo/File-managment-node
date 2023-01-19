@@ -43,7 +43,7 @@ const fs = require('fs/promises');
     const fileHandler = await fs.open('./commands.txt', 'r');
 
     fileHandler.on('change', async ()=>{
-        console.log('the file was changed');
+        console.log('the file was changed!');
         const size = ( await fileHandler.stat()).size;
         const buff = Buffer.alloc(size);
         const offset = 0;
